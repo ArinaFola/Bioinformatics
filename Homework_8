@@ -10,9 +10,9 @@
 4. while read name; do read ticket; if [[ $ticket == *"777"* ]]; then echo "$name $ticket" >> fout; fi; done < fin; cat fout
 Ответ: 
 Sam
- 957779
+957779
 Varun
- 077712
+077712
 
 5. sort -k2,2 -k3,3n -k4,4n fin > fout; cat fout
 Ответ: 
