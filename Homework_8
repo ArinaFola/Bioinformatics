@@ -1,0 +1,47 @@
+1. sum=$(awk '{print $1 + $2 + $3}' fin); echo $sum > fout; cat fout
+Ответ: 20
+
+2. echo "Hello, world!" > fout; cat fout
+Ответ: Hello, world!
+
+3. head -c 10 fin | tail -c 1 > fout; cat fout
+Ответ: f
+
+4. while read name; do read ticket; if [[ $ticket == *"777"* ]]; then echo "$name $ticket" >> fout; fi; done < fin; cat fout
+Ответ: 
+Sam
+957779
+Varun
+077712
+
+5. sort -k2,2 -k3,3n -k4,4n fin > fout; cat fout
+Ответ: 
+ENSP102T003	1	1258	1679
+ENSP103T002	1	2257	3199
+ENSP102T007	14	3402	4090
+ENSP102T010	17	7157	7980
+ENSP102T004	2	1680	2134
+ENSP102T009	21	6432	7156
+ENSP102T008	22	5968	6431
+ENSP102T002	3	935	1257
+ENSP102T001	5	578	934
+ENSP102T005	7	2135	2731
+ENSP102T011	X	9672	10014
+ENSP103T001	Y	1234	2256
+ENSP102T006	Y	2732	3401
+
+6.1 total=0; while IFS= read -r line; do if [[ $line =~ [0-9] ]] && ! [[ $line =~ [XxYy] ]]; then len=$(echo -n "$line" | wc -c); total=$((total + len)); fi; done < fin; echo $total
+Ответ: 88
+
+6.2 total=0; while IFS= read -r line; do if [[ $line =~ [0-9] ]] && ! [[ $line =~ [XxYy] ]]; then len=$(echo -n "$line" | wc -c); total=$((total + len)); fi; done < fin; echo $total
+Ответ: 59
+
+7. longest_ins=$(grep -E "1\t.*INS" clinvar.vcf | awk -F'\t' '{print $5, length($5)}' | sort -k2,2nr | head -1 | awk '{print $1}'); longest_del=$(grep -E "2\t.*DEL" clinvar.vcf | awk -F'\t' '{print $5, length($5)}' | sort -k2,2nr | head -1 | awk '{print $1}'); echo "Longest insertion in chr1: $longest_ins" > fout; echo "Longest deletion in chr2: $longest_del" >> fout; cat fout
+Ответ (сам файл изначальный не прогружается): 
+Longest insertion in chr1: 
+Longest deletion in chr2: 
+
+8. awk -F':' '/^[aAbB]/ {print "Username: " $1 ", Home: " $6 ", Password: " $2}' fin > fout; cat fout
+Ответ: 
+Username: anotheruser, Home: ~/Projects, Password: secret
+Username: boot, Home: ~/etc, Password: default
